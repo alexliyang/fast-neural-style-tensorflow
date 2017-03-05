@@ -42,9 +42,9 @@ def main(FLAGS):
                                             'train2014/', image_preprocessing_fn, epochs=FLAGS.epoch)
             generated = model.net(processed_images, training=True)
             processed_generated = [image_preprocessing_fn(image, FLAGS.image_size, FLAGS.image_size)
-                                   for image in tf.unpack(generated, axis=0, num=FLAGS.batch_size)
+                                   for image in tf.unstack(generated, axis=0, num=FLAGS.batch_size)
                                    ]
-            processed_generated = tf.pack(processed_generated)
+            processed_generated = tf.stack(processed_generated)
             _, endpoints_dict = network_fn(tf.concat(0, [processed_generated, processed_images]), spatial_squeeze=False)
             tf.logging.info('Loss network layers(You can define them in "content_layers" and "style_layers"):')
             for key in endpoints_dict:
@@ -70,8 +70,8 @@ def main(FLAGS):
                 tf.scalar_summary('style_losses/' + layer, style_loss_summary[layer])
             tf.image_summary('generated', generated)
             # tf.image_summary('processed_generated', processed_generated)  # May be better?
-            tf.image_summary('origin', tf.pack([
-                image_unprocessing_fn(image) for image in tf.unpack(processed_images, axis=0, num=FLAGS.batch_size)
+            tf.image_summary('origin', tf.stack([
+                 image_unprocessing_fn(image) for image in tf.unstack(processed_images, axis=0, num=FLAGS.batch_size)
             ]))
             summary = tf.merge_all_summaries()
             writer = tf.train.SummaryWriter(training_path)

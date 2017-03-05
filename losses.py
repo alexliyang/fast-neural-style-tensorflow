@@ -15,7 +15,7 @@ def gram(layer):
     width = shape[1]
     height = shape[2]
     num_filters = shape[3]
-    filters = tf.reshape(layer, tf.pack([num_images, -1, num_filters]))
+    filters = tf.reshape(layer, tf.stack([num_images, -1, num_filters]))
     grams = tf.batch_matmul(filters, filters, adj_x=True) / tf.to_float(width * height * num_filters)
 
     return grams
@@ -43,7 +43,7 @@ def get_style_features(FLAGS):
         else:
             image = tf.image.decode_jpeg(img_bytes)
         # image = _aspect_preserving_resize(image, size)
-        images = tf.pack([image_preprocessing_fn(image, size, size)])
+        images = tf.stack([image_preprocessing_fn(image, size, size)])
         _, endpoints_dict = network_fn(images, spatial_squeeze=False)
         features = []
         for layer in FLAGS.style_layers:
@@ -90,7 +90,7 @@ def total_variation_loss(layer):
     shape = tf.shape(layer)
     height = shape[1]
     width = shape[2]
-    y = tf.slice(layer, [0, 0, 0, 0], tf.pack([-1, height - 1, -1, -1])) - tf.slice(layer, [0, 1, 0, 0], [-1, -1, -1, -1])
-    x = tf.slice(layer, [0, 0, 0, 0], tf.pack([-1, -1, width - 1, -1])) - tf.slice(layer, [0, 0, 1, 0], [-1, -1, -1, -1])
+    y = tf.slice(layer, [0, 0, 0, 0], tf.stack([-1, height - 1, -1, -1])) - tf.slice(layer, [0, 1, 0, 0], [-1, -1, -1, -1])
+    x = tf.slice(layer, [0, 0, 0, 0], tf.stack([-1, -1, width - 1, -1])) - tf.slice(layer, [0, 0, 1, 0], [-1, -1, -1, -1])
     loss = tf.nn.l2_loss(x) / tf.to_float(tf.size(x)) + tf.nn.l2_loss(y) / tf.to_float(tf.size(y))
     return loss
