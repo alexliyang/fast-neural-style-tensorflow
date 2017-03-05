@@ -64,3 +64,10 @@ tensorboard --logdir models/wave/
 Checkpoints will be written to "models/wave/".
 
 View the [configuration file](https://github.com/hzy46/fast-neural-style-tensorflow/blob/master/conf/wave.yml) for details.
+
+
+web UI 
+```
+python web.py
+```
+webbrowse open http://127.0.0.1:5000
