@@ -73,6 +73,6 @@ python web.py
 webbrowse open http://127.0.0.1:5000
 
 like:
-(http://img.blog.csdn.net/20170305152641943?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWxwYQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+<img src="http://img.blog.csdn.net/20170305152641943?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWxwYQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"/>
 
-(http://img.blog.csdn.net/20170305152729194?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWxwYQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+<img src="http://img.blog.csdn.net/20170305152729194?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWxwYQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"/>
