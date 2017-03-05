@@ -12,7 +12,7 @@ import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'do you guess,haha..dsdsddi4985'
 
-#UPLOAD_FOLDER='/Users/smb/upfile/'
+
 UPLOAD_FOLDER='upfile/'
 ALLOWED_EXTENSIONS=set(['png','jpg','jpeg'])
 
@@ -47,13 +47,7 @@ def deal_photo():
         file=request.files['pic']
         theme = request.form['theme']
         if file and allowed_file(file.filename):
-            #filename=secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
-            # tf.app.flags.DEFINE_string("model_file",'/Users/smb/PycharmProjects/fast-neural-style-tensorflow/models/wave.ckpt-done', "")
-            # tf.app.flags.DEFINE_string("image_file", os.path.join(app.config['UPLOAD_FOLDER'])+"/"+file.filename, "")
-            # tf.logging.set_verbosity(tf.logging.INFO)
-            # tf.app.run()
-            #style_transform('/Users/smb/PycharmProjects/fast-neural-style-tensorflow/models/wave.ckpt-done',os.path.join(app.config['UPLOAD_FOLDER'])+file.filename,file.filename)
             model_file = 'wave.ckpt-done'
             if theme!='':
                 if modelDict[theme]!='':
